@@ -17,13 +17,13 @@ import { SortControl } from "./SortControl";
 const ParkingMap = dynamic(() => import("./ParkingMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-[500px] items-center justify-center rounded-xl border border-slate-200 bg-white text-sm text-slate-500">
+    <div className="flex h-[450px] items-center justify-center rounded-xl border border-slate-200 bg-white text-sm text-slate-500">
       地図を読み込み中...
     </div>
   ),
 });
 
-type ViewMode = "list" | "map";
+type ViewMode = "list" | "map" | "both";
 
 interface Props {
   parkings: Parking[];
@@ -51,7 +51,9 @@ export function ParkingFinder({ parkings }: Props) {
   const [criteria, setCriteria] = useState<FilterCriteria>(defaultCriteria);
   const [geo, setGeo] = useState<GeoState>({ kind: "idle" });
   const [tagSummaries, setTagSummaries] = useState<Record<string, TagSummary>>({});
-  const [view, setView] = useState<ViewMode>("list");
+  const [view, setView] = useState<ViewMode>("both");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   useEffect(() => {
     setTagSummaries(getAllSummariesByParking());
@@ -82,6 +84,37 @@ export function ParkingFinder({ parkings }: Props) {
   const effectiveSort =
     criteria.sort === "distance" && !userLocation ? "priceAsc" : criteria.sort;
 
+  const showList = view === "list" || view === "both";
+  const showMap = view === "map" || view === "both";
+  const highlightedId = hoveredId ?? selectedId;
+
+  const mapNode = (
+    <ParkingMap
+      parkings={filtered}
+      userLocation={userLocation}
+      selectedId={selectedId}
+      highlightedId={highlightedId}
+      onSelect={setSelectedId}
+    />
+  );
+
+  const listNode = (
+    <>
+      <SortControl
+        value={criteria.sort}
+        onChange={(sort) => setCriteria((prev) => ({ ...prev, sort }))}
+        effectiveSort={effectiveSort}
+      />
+      <ParkingList
+        parkings={filtered}
+        tagSummaries={tagSummaries}
+        selectedId={selectedId}
+        onSelect={setSelectedId}
+        onHover={setHoveredId}
+      />
+    </>
+  );
+
   return (
     <div className="space-y-4">
       <LocationStatus state={geo} onRequest={requestLocation} />
@@ -108,15 +141,26 @@ export function ParkingFinder({ parkings }: Props) {
         </div>
 
         <div className="space-y-3">
-          <div className="flex items-center justify-between gap-3 rounded-lg bg-white px-4 py-2 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg bg-white px-4 py-2 shadow-sm">
             <span className="text-sm font-semibold text-slate-800">
               {filtered.length}件 ヒット
             </span>
             <div className="inline-flex overflow-hidden rounded-lg border border-slate-300 text-sm">
               <button
                 type="button"
-                onClick={() => setView("list")}
+                onClick={() => setView("both")}
                 className={`px-3 py-1 ${
+                  view === "both"
+                    ? "bg-brand text-white"
+                    : "bg-white text-slate-600 hover:bg-slate-50"
+                }`}
+              >
+                🗺📋 両方
+              </button>
+              <button
+                type="button"
+                onClick={() => setView("list")}
+                className={`border-l border-slate-300 px-3 py-1 ${
                   view === "list"
                     ? "bg-brand text-white"
                     : "bg-white text-slate-600 hover:bg-slate-50"
@@ -127,7 +171,7 @@ export function ParkingFinder({ parkings }: Props) {
               <button
                 type="button"
                 onClick={() => setView("map")}
-                className={`px-3 py-1 ${
+                className={`border-l border-slate-300 px-3 py-1 ${
                   view === "map"
                     ? "bg-brand text-white"
                     : "bg-white text-slate-600 hover:bg-slate-50"
@@ -138,18 +182,8 @@ export function ParkingFinder({ parkings }: Props) {
             </div>
           </div>
 
-          {view === "list" ? (
-            <>
-              <SortControl
-                value={criteria.sort}
-                onChange={(sort) => setCriteria((prev) => ({ ...prev, sort }))}
-                effectiveSort={effectiveSort}
-              />
-              <ParkingList parkings={filtered} tagSummaries={tagSummaries} />
-            </>
-          ) : (
-            <ParkingMap parkings={filtered} userLocation={userLocation} />
-          )}
+          {showMap && mapNode}
+          {showList && <div className="space-y-3">{listNode}</div>}
         </div>
       </div>
     </div>

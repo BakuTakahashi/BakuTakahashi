@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   MapContainer,
   Marker,
@@ -15,33 +15,23 @@ import Link from "next/link";
 import type { ParkingWithDistance } from "@/types/parking";
 import { formatDistanceKm, formatYen, formatCmToM } from "@/lib/format";
 
-const ICON_BASE = "https://unpkg.com/leaflet@1.9.4/dist/images";
-
-const defaultIcon = L.icon({
-  iconUrl: `${ICON_BASE}/marker-icon.png`,
-  iconRetinaUrl: `${ICON_BASE}/marker-icon-2x.png`,
-  shadowUrl: `${ICON_BASE}/marker-shadow.png`,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-const bigCarFriendlyIcon = L.divIcon({
-  className: "custom-marker-icon",
-  html: `<div style="background:#0F766E;color:#fff;width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.4);font-weight:700;font-size:14px;"><span style="transform:rotate(45deg);">🚙</span></div>`,
-  iconSize: [30, 30],
-  iconAnchor: [15, 30],
-  popupAnchor: [0, -30],
-});
-
-const standardIcon = L.divIcon({
-  className: "custom-marker-icon",
-  html: `<div style="background:#94a3b8;color:#fff;width:24px;height:24px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.4);font-size:12px;"><span style="transform:rotate(45deg);">P</span></div>`,
-  iconSize: [24, 24],
-  iconAnchor: [12, 24],
-  popupAnchor: [0, -24],
-});
+function pinIcon(opts: {
+  color: string;
+  emoji: string;
+  size: number;
+  selected?: boolean;
+}) {
+  const ring = opts.selected
+    ? `box-shadow:0 0 0 4px rgba(245,158,11,0.85),0 1px 4px rgba(0,0,0,0.4);`
+    : `box-shadow:0 1px 4px rgba(0,0,0,0.4);`;
+  return L.divIcon({
+    className: "custom-marker-icon",
+    html: `<div style="background:${opts.color};color:#fff;width:${opts.size}px;height:${opts.size}px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;border:2px solid #fff;${ring}font-weight:700;font-size:${Math.round(opts.size * 0.45)}px;"><span style="transform:rotate(45deg);">${opts.emoji}</span></div>`,
+    iconSize: [opts.size, opts.size],
+    iconAnchor: [opts.size / 2, opts.size],
+    popupAnchor: [0, -opts.size],
+  });
+}
 
 const userIcon = L.divIcon({
   className: "user-marker-icon",
@@ -53,6 +43,9 @@ const userIcon = L.divIcon({
 interface Props {
   parkings: ParkingWithDistance[];
   userLocation: { lat: number; lng: number } | null;
+  selectedId: string | null;
+  highlightedId: string | null;
+  onSelect: (id: string | null) => void;
 }
 
 interface BoundsUpdaterProps {
@@ -69,7 +62,46 @@ function BoundsUpdater({ bounds }: BoundsUpdaterProps) {
   return null;
 }
 
-export default function ParkingMap({ parkings, userLocation }: Props) {
+function PanToSelected({
+  parkings,
+  selectedId,
+}: {
+  parkings: ParkingWithDistance[];
+  selectedId: string | null;
+}) {
+  const map = useMap();
+  useEffect(() => {
+    if (!selectedId) return;
+    const target = parkings.find((p) => p.id === selectedId);
+    if (!target) return;
+    map.flyTo([target.lat, target.lng], Math.max(map.getZoom(), 14), {
+      duration: 0.6,
+    });
+  }, [selectedId, parkings, map]);
+  return null;
+}
+
+function category(p: ParkingWithDistance): {
+  color: string;
+  emoji: string;
+  label: string;
+} {
+  const isBigCarOk = p.vehicleLimit.maxWidthCm >= 1950;
+  if (isBigCarOk) return { color: "#0F766E", emoji: "🚙", label: "大型OK" };
+  if (p.structure === "mechanical" || p.structure === "tower")
+    return { color: "#94a3b8", emoji: "P", label: "機械式・タワー" };
+  return { color: "#3b82f6", emoji: "P", label: "標準" };
+}
+
+export default function ParkingMap({
+  parkings,
+  userLocation,
+  selectedId,
+  highlightedId,
+  onSelect,
+}: Props) {
+  const markerRefs = useRef<Record<string, L.Marker | null>>({});
+
   const bounds = useMemo<L.LatLngBoundsExpression | null>(() => {
     const points: [number, number][] = parkings.map((p) => [p.lat, p.lng]);
     if (userLocation) points.push([userLocation.lat, userLocation.lng]);
@@ -84,6 +116,12 @@ export default function ParkingMap({ parkings, userLocation }: Props) {
     return points;
   }, [parkings, userLocation]);
 
+  useEffect(() => {
+    if (!selectedId) return;
+    const m = markerRefs.current[selectedId];
+    if (m) m.openPopup();
+  }, [selectedId]);
+
   const center: [number, number] = userLocation
     ? [userLocation.lat, userLocation.lng]
     : parkings.length > 0
@@ -95,7 +133,7 @@ export default function ParkingMap({ parkings, userLocation }: Props) {
       <MapContainer
         center={center}
         zoom={12}
-        style={{ height: 500, width: "100%" }}
+        style={{ height: 450, width: "100%" }}
         scrollWheelZoom={true}
       >
         <TileLayer
@@ -103,6 +141,7 @@ export default function ParkingMap({ parkings, userLocation }: Props) {
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <BoundsUpdater bounds={bounds} />
+        <PanToSelected parkings={parkings} selectedId={selectedId} />
 
         {userLocation && (
           <>
@@ -121,14 +160,31 @@ export default function ParkingMap({ parkings, userLocation }: Props) {
         )}
 
         {parkings.map((p) => {
-          const isBigCarOk = p.vehicleLimit.maxWidthCm >= 1950;
-          const icon = isBigCarOk
-            ? bigCarFriendlyIcon
-            : p.structure === "mechanical" || p.structure === "tower"
-              ? standardIcon
-              : defaultIcon;
+          const cat = category(p);
+          const isHighlighted = highlightedId === p.id;
+          const isSelected = selectedId === p.id;
+          const size = isHighlighted || isSelected ? 38 : 26;
+          const icon = pinIcon({
+            color: cat.color,
+            emoji: cat.emoji,
+            size,
+            selected: isSelected,
+          });
           return (
-            <Marker key={p.id} position={[p.lat, p.lng]} icon={icon}>
+            <Marker
+              key={p.id}
+              position={[p.lat, p.lng]}
+              icon={icon}
+              ref={(el) => {
+                markerRefs.current[p.id] = el;
+              }}
+              eventHandlers={{
+                click: () => onSelect(p.id),
+                popupclose: () => {
+                  if (selectedId === p.id) onSelect(null);
+                },
+              }}
+            >
               <Popup>
                 <div className="space-y-1 text-sm">
                   <div className="font-bold">{p.name}</div>

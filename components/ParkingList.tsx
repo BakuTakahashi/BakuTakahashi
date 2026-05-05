@@ -5,9 +5,18 @@ import { ParkingCard } from "./ParkingCard";
 interface Props {
   parkings: ParkingWithDistance[];
   tagSummaries: Record<string, TagSummary>;
+  selectedId: string | null;
+  onSelect: (id: string | null) => void;
+  onHover: (id: string | null) => void;
 }
 
-export function ParkingList({ parkings, tagSummaries }: Props) {
+export function ParkingList({
+  parkings,
+  tagSummaries,
+  selectedId,
+  onSelect,
+  onHover,
+}: Props) {
   if (parkings.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center">
@@ -25,7 +34,14 @@ export function ParkingList({ parkings, tagSummaries }: Props) {
     <ul className="space-y-3">
       {parkings.map((p) => (
         <li key={p.id}>
-          <ParkingCard parking={p} tagSummary={tagSummaries[p.id]} />
+          <ParkingCard
+            parking={p}
+            tagSummary={tagSummaries[p.id]}
+            selected={selectedId === p.id}
+            onSelect={() => onSelect(selectedId === p.id ? null : p.id)}
+            onHoverStart={() => onHover(p.id)}
+            onHoverEnd={() => onHover(null)}
+          />
         </li>
       ))}
     </ul>

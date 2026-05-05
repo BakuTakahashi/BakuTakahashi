@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import type { ParkingWithDistance } from "@/types/parking";
 import type { TagSummary } from "@/types/bigCarTag";
 import { BIG_CAR_TAG_EMOJI } from "@/types/bigCarTag";
@@ -32,12 +35,44 @@ const STATUS_BADGE: Record<string, { label: string; className: string }> = {
 interface Props {
   parking: ParkingWithDistance;
   tagSummary?: TagSummary;
+  selected?: boolean;
+  onSelect?: () => void;
+  onHoverStart?: () => void;
+  onHoverEnd?: () => void;
 }
 
-export function ParkingCard({ parking, tagSummary }: Props) {
+export function ParkingCard({
+  parking,
+  tagSummary,
+  selected = false,
+  onSelect,
+  onHoverStart,
+  onHoverEnd,
+}: Props) {
   const status = STATUS_BADGE[parking.availability.status];
+  const articleRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (selected && articleRef.current) {
+      articleRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [selected]);
+
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-brand">
+    <article
+      ref={articleRef}
+      onClick={onSelect}
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
+      onFocus={onHoverStart}
+      onBlur={onHoverEnd}
+      tabIndex={0}
+      className={`cursor-pointer rounded-xl border bg-white p-4 shadow-sm transition ${
+        selected
+          ? "border-amber-400 ring-2 ring-amber-200"
+          : "border-slate-200 hover:border-brand"
+      }`}
+    >
       <header className="flex items-start justify-between gap-3">
         <div>
           <h3 className="text-base font-bold text-slate-900">{parking.name}</h3>
@@ -114,6 +149,7 @@ export function ParkingCard({ parking, tagSummary }: Props) {
       <div className="mt-3 flex justify-end">
         <Link
           href={`/parking/${parking.id}`}
+          onClick={(e) => e.stopPropagation()}
           className="rounded-lg bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-dark"
         >
           詳細を見る →
