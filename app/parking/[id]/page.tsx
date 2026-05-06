@@ -1,26 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { fetchParkingById, fetchParkings } from "@/lib/parkings";
 import { GoogleMapEmbed } from "@/components/GoogleMapEmbed";
 import { BigCarTagPanel } from "@/components/BigCarTagPanel";
-import {
-  formatCmToM,
-  formatKg,
-  formatYen,
-} from "@/lib/format";
-
-const STRUCTURE_LABELS: Record<string, string> = {
-  flat: "平面",
-  mechanical: "機械式",
-  tower: "タワー式",
-  underground: "地下",
-  rooftop: "屋上",
-};
-
-const FACILITY_LABELS: Record<string, string> = {
-  indoor: "屋内",
-  outdoor: "屋外",
-};
+import { formatCmToM, formatKg, formatYen } from "@/lib/format";
+import { FACILITY_LABELS, STRUCTURE_LABELS } from "@/lib/labels";
 
 export async function generateStaticParams() {
   const parkings = await fetchParkings();
@@ -29,6 +14,24 @@ export async function generateStaticParams() {
 
 interface PageProps {
   params: { id: string };
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const parking = await fetchParkingById(params.id);
+  if (!parking) {
+    return { title: "駐車場が見つかりません | 大型車対応 駐車場ファインダー" };
+  }
+  const widthM = formatCmToM(parking.vehicleLimit.maxWidthCm);
+  const description = `${parking.address} | 平日 ${formatYen(parking.fee.weekdayHourlyYen)}/時・最大車幅 ${widthM}・${FACILITY_LABELS[parking.facilityType]}/${STRUCTURE_LABELS[parking.structure]}`;
+  return {
+    title: `${parking.name} | 大型車対応 駐車場ファインダー`,
+    description,
+    openGraph: {
+      title: parking.name,
+      description,
+      type: "website",
+    },
+  };
 }
 
 export default async function ParkingDetailPage({ params }: PageProps) {

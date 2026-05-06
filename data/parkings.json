@@ -7,38 +7,85 @@
     "lng": 139.7671,
     "facilityType": "indoor",
     "structure": "underground",
-    "vehicleLimit": { "maxWidthCm": 1900, "maxLengthCm": 5000, "maxHeightCm": 1550, "maxWeightKg": 2300 },
-    "fee": { "weekdayHourlyYen": 600, "weekendHourlyYen": 600, "maxDailyYen": 3500 },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "few", "freeSpots": 4, "totalSpots": 120 },
+    "vehicleLimit": {
+      "maxWidthCm": 190,
+      "maxLengthCm": 500,
+      "maxHeightCm": 155,
+      "maxWeightKg": 2300
+    },
+    "fee": {
+      "weekdayHourlyYen": 600,
+      "weekendHourlyYen": 600,
+      "maxDailyYen": 3500
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "few",
+      "freeSpots": 4,
+      "totalSpots": 120
+    },
     "notes": "高さ制限あり。ハイルーフ車は要確認"
   },
   {
     "id": "p002",
     "name": "新宿西口タワーパーキング",
     "address": "東京都新宿区西新宿1-1-3",
-    "lat": 35.6900,
+    "lat": 35.69,
     "lng": 139.6982,
     "facilityType": "indoor",
     "structure": "tower",
-    "vehicleLimit": { "maxWidthCm": 1850, "maxLengthCm": 5000, "maxHeightCm": 1550, "maxWeightKg": 2000 },
-    "fee": { "weekdayHourlyYen": 500, "weekendHourlyYen": 600, "maxDailyYen": 2800 },
-    "openingHours": { "is24h": false, "openTime": "07:00", "closeTime": "23:00" },
-    "availability": { "status": "available", "freeSpots": 18, "totalSpots": 80 },
+    "vehicleLimit": {
+      "maxWidthCm": 185,
+      "maxLengthCm": 500,
+      "maxHeightCm": 155,
+      "maxWeightKg": 2000
+    },
+    "fee": {
+      "weekdayHourlyYen": 500,
+      "weekendHourlyYen": 600,
+      "maxDailyYen": 2800
+    },
+    "openingHours": {
+      "is24h": false,
+      "openTime": "07:00",
+      "closeTime": "23:00"
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 18,
+      "totalSpots": 80
+    },
     "notes": "機械式タワー。大型車不可"
   },
   {
     "id": "p003",
     "name": "渋谷スクランブル平面パーキング",
     "address": "東京都渋谷区道玄坂2-29-1",
-    "lat": 35.6580,
+    "lat": 35.658,
     "lng": 139.7016,
     "facilityType": "outdoor",
     "structure": "flat",
-    "vehicleLimit": { "maxWidthCm": 2200, "maxLengthCm": 5500, "maxHeightCm": 2500, "maxWeightKg": 3000 },
-    "fee": { "weekdayHourlyYen": 800, "weekendHourlyYen": 900, "maxDailyYen": null },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "full", "freeSpots": 0, "totalSpots": 35 },
+    "vehicleLimit": {
+      "maxWidthCm": 220,
+      "maxLengthCm": 550,
+      "maxHeightCm": 250,
+      "maxWeightKg": 3000
+    },
+    "fee": {
+      "weekdayHourlyYen": 800,
+      "weekendHourlyYen": 900,
+      "maxDailyYen": null
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "full",
+      "freeSpots": 0,
+      "totalSpots": 35
+    },
     "notes": "平面駐車場。大型車・キャンピングカーOK"
   },
   {
@@ -46,13 +93,28 @@
     "name": "池袋サンシャインパーキング",
     "address": "東京都豊島区東池袋3-1",
     "lat": 35.7295,
-    "lng": 139.7200,
+    "lng": 139.72,
     "facilityType": "indoor",
     "structure": "mechanical",
-    "vehicleLimit": { "maxWidthCm": 1850, "maxLengthCm": 5000, "maxHeightCm": 1550, "maxWeightKg": 2000 },
-    "fee": { "weekdayHourlyYen": 400, "weekendHourlyYen": 500, "maxDailyYen": 2400 },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "available", "freeSpots": 25, "totalSpots": 200 },
+    "vehicleLimit": {
+      "maxWidthCm": 185,
+      "maxLengthCm": 500,
+      "maxHeightCm": 155,
+      "maxWeightKg": 2000
+    },
+    "fee": {
+      "weekdayHourlyYen": 400,
+      "weekendHourlyYen": 500,
+      "maxDailyYen": 2400
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 25,
+      "totalSpots": 200
+    },
     "notes": "機械式。標準サイズまで"
   },
   {
@@ -60,13 +122,28 @@
     "name": "横浜みなとみらい平面駐車場",
     "address": "神奈川県横浜市西区みなとみらい2-3-5",
     "lat": 35.4565,
-    "lng": 139.6320,
+    "lng": 139.632,
     "facilityType": "outdoor",
     "structure": "flat",
-    "vehicleLimit": { "maxWidthCm": 2300, "maxLengthCm": 6000, "maxHeightCm": 3000, "maxWeightKg": 3500 },
-    "fee": { "weekdayHourlyYen": 300, "weekendHourlyYen": 400, "maxDailyYen": 1500 },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "available", "freeSpots": 50, "totalSpots": 220 },
+    "vehicleLimit": {
+      "maxWidthCm": 230,
+      "maxLengthCm": 600,
+      "maxHeightCm": 300,
+      "maxWeightKg": 3500
+    },
+    "fee": {
+      "weekdayHourlyYen": 300,
+      "weekendHourlyYen": 400,
+      "maxDailyYen": 1500
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 50,
+      "totalSpots": 220
+    },
     "notes": "広々平面、大型車・トラック可"
   },
   {
@@ -77,10 +154,27 @@
     "lng": 139.7763,
     "facilityType": "indoor",
     "structure": "flat",
-    "vehicleLimit": { "maxWidthCm": 2100, "maxLengthCm": 5300, "maxHeightCm": 2300, "maxWeightKg": 2500 },
-    "fee": { "weekdayHourlyYen": 500, "weekendHourlyYen": 600, "maxDailyYen": 2500 },
-    "openingHours": { "is24h": false, "openTime": "08:00", "closeTime": "23:00" },
-    "availability": { "status": "available", "freeSpots": 80, "totalSpots": 400 },
+    "vehicleLimit": {
+      "maxWidthCm": 210,
+      "maxLengthCm": 530,
+      "maxHeightCm": 230,
+      "maxWeightKg": 2500
+    },
+    "fee": {
+      "weekdayHourlyYen": 500,
+      "weekendHourlyYen": 600,
+      "maxDailyYen": 2500
+    },
+    "openingHours": {
+      "is24h": false,
+      "openTime": "08:00",
+      "closeTime": "23:00"
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 80,
+      "totalSpots": 400
+    },
     "notes": "屋内平面、SUV・ハイルーフ可"
   },
   {
@@ -91,10 +185,25 @@
     "lng": 139.7292,
     "facilityType": "indoor",
     "structure": "tower",
-    "vehicleLimit": { "maxWidthCm": 1880, "maxLengthCm": 5050, "maxHeightCm": 1550, "maxWeightKg": 2100 },
-    "fee": { "weekdayHourlyYen": 700, "weekendHourlyYen": 800, "maxDailyYen": null },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "few", "freeSpots": 6, "totalSpots": 150 },
+    "vehicleLimit": {
+      "maxWidthCm": 188,
+      "maxLengthCm": 505,
+      "maxHeightCm": 155,
+      "maxWeightKg": 2100
+    },
+    "fee": {
+      "weekdayHourlyYen": 700,
+      "weekendHourlyYen": 800,
+      "maxDailyYen": null
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "few",
+      "freeSpots": 6,
+      "totalSpots": 150
+    },
     "notes": "タワー式。寸法ギリギリ要注意"
   },
   {
@@ -105,10 +214,27 @@
     "lng": 139.7745,
     "facilityType": "indoor",
     "structure": "underground",
-    "vehicleLimit": { "maxWidthCm": 1950, "maxLengthCm": 5100, "maxHeightCm": 2100, "maxWeightKg": 2500 },
-    "fee": { "weekdayHourlyYen": 400, "weekendHourlyYen": 400, "maxDailyYen": 2000 },
-    "openingHours": { "is24h": false, "openTime": "08:00", "closeTime": "22:30" },
-    "availability": { "status": "available", "freeSpots": 60, "totalSpots": 300 },
+    "vehicleLimit": {
+      "maxWidthCm": 195,
+      "maxLengthCm": 510,
+      "maxHeightCm": 210,
+      "maxWeightKg": 2500
+    },
+    "fee": {
+      "weekdayHourlyYen": 400,
+      "weekendHourlyYen": 400,
+      "maxDailyYen": 2000
+    },
+    "openingHours": {
+      "is24h": false,
+      "openTime": "08:00",
+      "closeTime": "22:30"
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 60,
+      "totalSpots": 300
+    },
     "notes": "地下、ミニバン可"
   },
   {
@@ -119,10 +245,25 @@
     "lng": 139.7402,
     "facilityType": "indoor",
     "structure": "mechanical",
-    "vehicleLimit": { "maxWidthCm": 1820, "maxLengthCm": 5000, "maxHeightCm": 1550, "maxWeightKg": 1900 },
-    "fee": { "weekdayHourlyYen": 500, "weekendHourlyYen": 500, "maxDailyYen": 2200 },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "few", "freeSpots": 3, "totalSpots": 100 },
+    "vehicleLimit": {
+      "maxWidthCm": 182,
+      "maxLengthCm": 500,
+      "maxHeightCm": 155,
+      "maxWeightKg": 1900
+    },
+    "fee": {
+      "weekdayHourlyYen": 500,
+      "weekendHourlyYen": 500,
+      "maxDailyYen": 2200
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "few",
+      "freeSpots": 3,
+      "totalSpots": 100
+    },
     "notes": "機械式。コンパクト車向け"
   },
   {
@@ -133,10 +274,25 @@
     "lng": 139.7886,
     "facilityType": "outdoor",
     "structure": "flat",
-    "vehicleLimit": { "maxWidthCm": 2400, "maxLengthCm": 6500, "maxHeightCm": 3500, "maxWeightKg": 4000 },
-    "fee": { "weekdayHourlyYen": 200, "weekendHourlyYen": 300, "maxDailyYen": 1200 },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "available", "freeSpots": 100, "totalSpots": 500 },
+    "vehicleLimit": {
+      "maxWidthCm": 240,
+      "maxLengthCm": 650,
+      "maxHeightCm": 350,
+      "maxWeightKg": 4000
+    },
+    "fee": {
+      "weekdayHourlyYen": 200,
+      "weekendHourlyYen": 300,
+      "maxDailyYen": 1200
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 100,
+      "totalSpots": 500
+    },
     "notes": "業務車両も可。広い"
   },
   {
@@ -147,10 +303,27 @@
     "lng": 139.7637,
     "facilityType": "indoor",
     "structure": "mechanical",
-    "vehicleLimit": { "maxWidthCm": 1850, "maxLengthCm": 5000, "maxHeightCm": 1550, "maxWeightKg": 2000 },
-    "fee": { "weekdayHourlyYen": 800, "weekendHourlyYen": 900, "maxDailyYen": null },
-    "openingHours": { "is24h": false, "openTime": "08:00", "closeTime": "23:00" },
-    "availability": { "status": "few", "freeSpots": 2, "totalSpots": 60 },
+    "vehicleLimit": {
+      "maxWidthCm": 185,
+      "maxLengthCm": 500,
+      "maxHeightCm": 155,
+      "maxWeightKg": 2000
+    },
+    "fee": {
+      "weekdayHourlyYen": 800,
+      "weekendHourlyYen": 900,
+      "maxDailyYen": null
+    },
+    "openingHours": {
+      "is24h": false,
+      "openTime": "08:00",
+      "closeTime": "23:00"
+    },
+    "availability": {
+      "status": "few",
+      "freeSpots": 2,
+      "totalSpots": 60
+    },
     "notes": "中心地・機械式。普通車のみ"
   },
   {
@@ -161,24 +334,56 @@
     "lng": 139.7733,
     "facilityType": "indoor",
     "structure": "flat",
-    "vehicleLimit": { "maxWidthCm": 2050, "maxLengthCm": 5200, "maxHeightCm": 2100, "maxWeightKg": 2500 },
-    "fee": { "weekdayHourlyYen": 350, "weekendHourlyYen": 450, "maxDailyYen": 2500 },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "available", "freeSpots": 70, "totalSpots": 350 },
+    "vehicleLimit": {
+      "maxWidthCm": 205,
+      "maxLengthCm": 520,
+      "maxHeightCm": 210,
+      "maxWeightKg": 2500
+    },
+    "fee": {
+      "weekdayHourlyYen": 350,
+      "weekendHourlyYen": 450,
+      "maxDailyYen": 2500
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 70,
+      "totalSpots": 350
+    },
     "notes": "屋内平面、ハイルーフ・SUV対応"
   },
   {
     "id": "p013",
     "name": "原宿表参道ヒルズ機械式",
     "address": "東京都渋谷区神宮前4-12-10",
-    "lat": 35.6680,
-    "lng": 139.7090,
+    "lat": 35.668,
+    "lng": 139.709,
     "facilityType": "indoor",
     "structure": "mechanical",
-    "vehicleLimit": { "maxWidthCm": 1850, "maxLengthCm": 5000, "maxHeightCm": 1550, "maxWeightKg": 2000 },
-    "fee": { "weekdayHourlyYen": 600, "weekendHourlyYen": 700, "maxDailyYen": null },
-    "openingHours": { "is24h": false, "openTime": "10:00", "closeTime": "22:00" },
-    "availability": { "status": "available", "freeSpots": 12, "totalSpots": 90 },
+    "vehicleLimit": {
+      "maxWidthCm": 185,
+      "maxLengthCm": 500,
+      "maxHeightCm": 155,
+      "maxWeightKg": 2000
+    },
+    "fee": {
+      "weekdayHourlyYen": 600,
+      "weekendHourlyYen": 700,
+      "maxDailyYen": null
+    },
+    "openingHours": {
+      "is24h": false,
+      "openTime": "10:00",
+      "closeTime": "22:00"
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 12,
+      "totalSpots": 90
+    },
     "notes": "機械式。3ナンバー注意"
   },
   {
@@ -189,10 +394,25 @@
     "lng": 139.7798,
     "facilityType": "indoor",
     "structure": "flat",
-    "vehicleLimit": { "maxWidthCm": 2300, "maxLengthCm": 5500, "maxHeightCm": 2300, "maxWeightKg": 3000 },
-    "fee": { "weekdayHourlyYen": 300, "weekendHourlyYen": 300, "maxDailyYen": 2570 },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "available", "freeSpots": 200, "totalSpots": 2000 },
+    "vehicleLimit": {
+      "maxWidthCm": 230,
+      "maxLengthCm": 550,
+      "maxHeightCm": 230,
+      "maxWeightKg": 3000
+    },
+    "fee": {
+      "weekdayHourlyYen": 300,
+      "weekendHourlyYen": 300,
+      "maxDailyYen": 2570
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 200,
+      "totalSpots": 2000
+    },
     "notes": "空港隣接。大型車OK"
   },
   {
@@ -200,13 +420,30 @@
     "name": "横浜中華街機械式パーキング",
     "address": "神奈川県横浜市中区山下町144",
     "lat": 35.4437,
-    "lng": 139.6470,
+    "lng": 139.647,
     "facilityType": "indoor",
     "structure": "mechanical",
-    "vehicleLimit": { "maxWidthCm": 1830, "maxLengthCm": 4900, "maxHeightCm": 1550, "maxWeightKg": 1900 },
-    "fee": { "weekdayHourlyYen": 400, "weekendHourlyYen": 500, "maxDailyYen": 1800 },
-    "openingHours": { "is24h": false, "openTime": "08:00", "closeTime": "22:00" },
-    "availability": { "status": "few", "freeSpots": 3, "totalSpots": 50 },
+    "vehicleLimit": {
+      "maxWidthCm": 183,
+      "maxLengthCm": 490,
+      "maxHeightCm": 155,
+      "maxWeightKg": 1900
+    },
+    "fee": {
+      "weekdayHourlyYen": 400,
+      "weekendHourlyYen": 500,
+      "maxDailyYen": 1800
+    },
+    "openingHours": {
+      "is24h": false,
+      "openTime": "08:00",
+      "closeTime": "22:00"
+    },
+    "availability": {
+      "status": "few",
+      "freeSpots": 3,
+      "totalSpots": 50
+    },
     "notes": "機械式。コンパクトのみ"
   },
   {
@@ -217,10 +454,27 @@
     "lng": 140.0356,
     "facilityType": "outdoor",
     "structure": "flat",
-    "vehicleLimit": { "maxWidthCm": 2400, "maxLengthCm": 6500, "maxHeightCm": 3800, "maxWeightKg": 5000 },
-    "fee": { "weekdayHourlyYen": 200, "weekendHourlyYen": 300, "maxDailyYen": 1500 },
-    "openingHours": { "is24h": false, "openTime": "06:00", "closeTime": "23:00" },
-    "availability": { "status": "available", "freeSpots": 500, "totalSpots": 5500 },
+    "vehicleLimit": {
+      "maxWidthCm": 240,
+      "maxLengthCm": 650,
+      "maxHeightCm": 380,
+      "maxWeightKg": 5000
+    },
+    "fee": {
+      "weekdayHourlyYen": 200,
+      "weekendHourlyYen": 300,
+      "maxDailyYen": 1500
+    },
+    "openingHours": {
+      "is24h": false,
+      "openTime": "06:00",
+      "closeTime": "23:00"
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 500,
+      "totalSpots": 5500
+    },
     "notes": "イベント時混雑。バス・トラック可"
   },
   {
@@ -231,10 +485,25 @@
     "lng": 139.7159,
     "facilityType": "indoor",
     "structure": "tower",
-    "vehicleLimit": { "maxWidthCm": 1850, "maxLengthCm": 5000, "maxHeightCm": 1550, "maxWeightKg": 2000 },
-    "fee": { "weekdayHourlyYen": 500, "weekendHourlyYen": 500, "maxDailyYen": 2400 },
-    "openingHours": { "is24h": true },
-    "availability": { "status": "available", "freeSpots": 15, "totalSpots": 70 },
+    "vehicleLimit": {
+      "maxWidthCm": 185,
+      "maxLengthCm": 500,
+      "maxHeightCm": 155,
+      "maxWeightKg": 2000
+    },
+    "fee": {
+      "weekdayHourlyYen": 500,
+      "weekendHourlyYen": 500,
+      "maxDailyYen": 2400
+    },
+    "openingHours": {
+      "is24h": true
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 15,
+      "totalSpots": 70
+    },
     "notes": "タワー式。標準セダン向け"
   },
   {
@@ -242,13 +511,30 @@
     "name": "ららぽーと豊洲屋上駐車場",
     "address": "東京都江東区豊洲2-4-9",
     "lat": 35.6553,
-    "lng": 139.7920,
+    "lng": 139.792,
     "facilityType": "outdoor",
     "structure": "rooftop",
-    "vehicleLimit": { "maxWidthCm": 2000, "maxLengthCm": 5200, "maxHeightCm": 2100, "maxWeightKg": 2500 },
-    "fee": { "weekdayHourlyYen": 300, "weekendHourlyYen": 400, "maxDailyYen": 2000 },
-    "openingHours": { "is24h": false, "openTime": "09:00", "closeTime": "23:00" },
-    "availability": { "status": "available", "freeSpots": 120, "totalSpots": 800 },
+    "vehicleLimit": {
+      "maxWidthCm": 200,
+      "maxLengthCm": 520,
+      "maxHeightCm": 210,
+      "maxWeightKg": 2500
+    },
+    "fee": {
+      "weekdayHourlyYen": 300,
+      "weekendHourlyYen": 400,
+      "maxDailyYen": 2000
+    },
+    "openingHours": {
+      "is24h": false,
+      "openTime": "09:00",
+      "closeTime": "23:00"
+    },
+    "availability": {
+      "status": "available",
+      "freeSpots": 120,
+      "totalSpots": 800
+    },
     "notes": "屋上。スロープ通過に注意"
   }
 ]

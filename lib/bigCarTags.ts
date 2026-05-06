@@ -19,6 +19,14 @@ function emptySummary(): TagSummary {
   };
 }
 
+function localDateKey(input: Date | string = new Date()): string {
+  const d = typeof input === "string" ? new Date(input) : input;
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 function readAll(): BigCarTag[] {
   if (typeof window === "undefined") return [];
   try {
@@ -76,12 +84,12 @@ export type AddTagResult =
 export function addTag(input: AddTagInput): AddTagResult {
   if (typeof window === "undefined") return { ok: false, reason: "unavailable" };
   const all = readAll();
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateKey();
   const duplicate = all.some(
     (t) =>
       t.parkingId === input.parkingId &&
       t.kind === input.kind &&
-      t.createdAt.slice(0, 10) === today,
+      localDateKey(t.createdAt) === today,
   );
   if (duplicate) return { ok: false, reason: "duplicate" };
 

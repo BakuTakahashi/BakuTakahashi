@@ -1,7 +1,7 @@
 "use client";
 
 import type { FilterCriteria, VehicleInput } from "@/types/filter";
-import type { Structure } from "@/types/parking";
+import { ALL_STRUCTURES, STRUCTURE_LABELS } from "@/lib/labels";
 import { VehiclePresetButtons } from "./VehiclePresetButtons";
 
 interface Props {
@@ -9,22 +9,6 @@ interface Props {
   onChange: (next: FilterCriteria) => void;
   locationAvailable: boolean;
 }
-
-const STRUCTURE_LABELS: Record<Structure, string> = {
-  flat: "平面",
-  mechanical: "機械式",
-  tower: "タワー式",
-  underground: "地下",
-  rooftop: "屋上",
-};
-
-const ALL_STRUCTURES: Structure[] = [
-  "flat",
-  "mechanical",
-  "tower",
-  "underground",
-  "rooftop",
-];
 
 export function FilterPanel({ criteria, onChange, locationAvailable }: Props) {
   const setVehicle = (vehicle: VehicleInput) => onChange({ ...criteria, vehicle });
